@@ -29,7 +29,11 @@ for (const viewport of viewports) {
   await page.goto(baseUrl, { waitUntil: "networkidle" });
   await page.waitForSelector(".post-feature");
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.waitForTimeout(800);
+  await page.evaluate(async () => {
+    const images = [...document.images];
+    images.forEach((image) => { image.loading = "eager"; });
+    await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+  });
 
   const state = await page.evaluate(() => ({
     title: document.title,
