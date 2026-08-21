@@ -1,0 +1,15 @@
+{
+  "name": "skillog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:site": "node scripts/build-site.mjs",
+    "render:cards": "node scripts/render-cards.mjs",
+    "verify:cards": "node scripts/verify-template.mjs",
+    "verify:site": "node scripts/verify-site.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

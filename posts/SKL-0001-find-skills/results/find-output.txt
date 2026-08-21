@@ -1,0 +1,22 @@
+Install with npx skills add <owner/repo@skill>
+
+langchain-ai/deepagents@social-media 2.6K installs
+https://skills.sh/langchain-ai/deepagents/social-media
+
+blacktwist/social-media-skills@content-calendar-sms 1.6K installs
+https://skills.sh/blacktwist/social-media-skills/content-calendar-sms
+
+blacktwist/social-media-skills@content-strategy-sms 1.5K installs
+https://skills.sh/blacktwist/social-media-skills/content-strategy-sms
+
+blacktwist/social-media-skills@content-repurposer-sms 1.5K installs
+https://skills.sh/blacktwist/social-media-skills/content-repurposer-sms
+
+blacktwist/social-media-skills@content-pattern-analyzer-sms 1.3K installs
+https://skills.sh/blacktwist/social-media-skills/content-pattern-analyzer-sms
+
+nexscope-ai/ecommerce-skills@ecommerce-social-media-marketing 818 installs
+https://skills.sh/nexscope-ai/ecommerce-skills/ecommerce-social-media-marketing
+
+charlie947/social-media-skills@content-matrix 804 installs
+https://skills.sh/charlie947/social-media-skills/content-matrix

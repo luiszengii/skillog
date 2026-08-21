@@ -1,0 +1,58 @@
+{
+  "id": "SKL-0001",
+  "date": "2026.08.21",
+  "skill": "find-skills",
+  "source": "vercel-labs/skills",
+  "installs": "3.0M",
+  "query": "social media content",
+  "queryLabel": "社交媒体内容",
+  "resultCount": "20",
+  "topInstall": "2.6K",
+  "install": "npx skills add vercel-labs/skills --skill find-skills",
+  "results": [
+    { "name": "langchain-ai/deepagents@social-media", "installs": "2.6K" },
+    { "name": "blacktwist/social-media-skills@content-calendar-sms", "installs": "1.6K" },
+    { "name": "blacktwist/social-media-skills@content-strategy-sms", "installs": "1.5K" },
+    { "name": "blacktwist/social-media-skills@content-repurposer-sms", "installs": "1.5K" },
+    { "name": "blacktwist/social-media-skills@content-pattern-analyzer-sms", "installs": "1.3K" },
+    { "name": "nexscope-ai/ecommerce-skills@ecommerce-social-media-marketing", "installs": "818" },
+    { "name": "charlie947/social-media-skills@content-matrix", "installs": "804" }
+  ],
+  "cards": [
+    {
+      "kind": "cover",
+      "page": "01",
+      "title": "一句话找到 AI Skill",
+      "lede": "输入任务，它会带回候选、来源和安装量。"
+    },
+    {
+      "kind": "result",
+      "page": "02",
+      "title": "实测：搜“社交媒体内容”",
+      "lede": "一次返回 20 个候选。"
+    },
+    {
+      "kind": "intro",
+      "page": "03",
+      "title": "找 Skill，按这 3 步",
+      "lede": "热门 → 关键词 → 回源验证",
+      "steps": [
+        { "title": "先看热门榜", "copy": "先找已有安装记录的选项。" },
+        { "title": "再搜具体任务", "copy": "任务越具体，结果越可用。" },
+        { "title": "最后回源验证", "copy": "看作者、权限与 SKILL.md。" }
+      ],
+      "fit": "刚开始用 Codex、Claude Code 或 Cursor，想找更多能力的人。"
+    },
+    {
+      "kind": "access",
+      "page": "04",
+      "title": "来源与安装",
+      "specs": [
+        { "label": "来源", "value": "skills.sh / vercel-labs/skills" },
+        { "label": "兼容", "value": "Codex、Claude Code、Cursor 等 70+ Agent" },
+        { "label": "费用", "value": "CLI 开源；具体 Skill 可能另需 API 或订阅" }
+      ],
+      "audit": "当前 2 项通过、1 项警告。安装前读源码与权限。"
+    }
+  ]
+}
