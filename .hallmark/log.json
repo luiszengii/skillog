@@ -1,6 +1,13 @@
 [
   {
     "date": "2026-08-21",
+    "macrostructure": "Ecosystem Index",
+    "theme": "Skillog Editorial",
+    "enrichment": "real post thumbnails",
+    "brief": "Mobile-first Notion archive and content dashboard for GitHub Pages"
+  },
+  {
+    "date": "2026-08-21",
     "macrostructure": "Workbench",
     "theme": "Editorial",
     "enrichment": "E4 real output capture",
