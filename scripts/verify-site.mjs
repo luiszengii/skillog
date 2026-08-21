@@ -4,6 +4,8 @@ import { chromium } from "playwright";
 
 const root = path.resolve(import.meta.dirname, "..");
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4173";
+const exportData = JSON.parse(await fs.readFile(path.join(root, "data", "notion-export.json"), "utf8"));
+const expectedDecisionCount = exportData.decisions.length;
 const viewports = [
   { name: "mobile-320", width: 320, height: 720 },
   { name: "mobile-375", width: 375, height: 812 },
@@ -38,7 +40,7 @@ for (const viewport of viewports) {
     horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
   }));
 
-  if (consoleErrors.length || !state.hasContent || state.decisionCount !== 11 || state.brokenImages.length || state.horizontalOverflow) {
+  if (consoleErrors.length || !state.hasContent || state.decisionCount !== expectedDecisionCount || state.brokenImages.length || state.horizontalOverflow) {
     failures.push({ viewport: viewport.name, consoleErrors, ...state });
   }
 

@@ -18,6 +18,7 @@ const copies = [
   ["site/site.css", "docs/assets/site.css"],
   ["site/site.js", "docs/assets/site.js"],
   ["site/favicon.svg", "docs/assets/favicon.svg"],
+  ["site/robots.txt", "docs/robots.txt"],
   ["tokens.css", "docs/assets/tokens.css"],
   ["data/notion-export.json", "docs/data/notion-export.json"],
   ["data/notion-assets/root-01.png", "docs/assets/notion/root-01.png"],
@@ -37,7 +38,13 @@ for (const [source, target] of copies) {
 
 const zipPath = path.join(postAssets, "SKL-0001-cards.zip");
 await fs.rm(zipPath, { force: true });
-await execFileAsync("/usr/bin/zip", ["-j", "-q", zipPath, ...cards.map((card) => path.join(postAssets, card))]);
+await execFileAsync("/usr/bin/zip", [
+  "-j",
+  "-q",
+  "-X",
+  zipPath,
+  ...cards.map((card) => path.join(root, "posts", "SKL-0001-find-skills", "cards", card))
+]);
 
 await fs.writeFile(path.join(docs, ".nojekyll"), "", "utf8");
 await fs.copyFile(path.join(docs, "index.html"), path.join(docs, "404.html"));

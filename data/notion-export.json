@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-08-21T08:13:12+08:00",
+  "exportedAt": "2026-08-21T21:04:28+08:00",
   "source": {
     "title": "万术录 Skillog",
     "url": "https://app.notion.com/p/3c22c25c6ff380fc99c6d0e6ff0bdc7f"
@@ -162,6 +162,16 @@
       "decision": "固定记录三次原始指标；初期核心看每千观看新增关注与收藏率。",
       "reason": "固定时间点后内容才可横向比较，同时避免早期过度分析。",
       "alternative": "只记最终累计数据。"
+    },
+    {
+      "title": "发布边界：GitHub Pages 全量公开但禁止索引",
+      "date": "2026-08-21",
+      "type": "技术边界",
+      "status": "生效",
+      "impact": "高",
+      "decision": "GitHub Pages 公开展示完整 Notion 快照、帖子资产、策略与未来流量数据；页面设置 noindex、nofollow、noarchive、nosnippet、noimageindex，robots.txt 对所有爬虫 Disallow。",
+      "reason": "主理人希望手机端直接操作与查看，并接受网页公开风险，但不希望搜索引擎带来自然流量。",
+      "alternative": "公开 Pages 只展示帖子，完整策略保留在私有仓库；或不部署 Pages。"
     }
   ]
 }
