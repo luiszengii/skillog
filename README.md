@@ -14,10 +14,13 @@ npm run build:site
 ## 数据分工
 
 - `data/notion-export.json`：Notion 结构化数据快照
+- `data/conversations.json`：用户可见对话与结果索引
+- `data/metrics.json`：流量快照的结构化指标
+- `journal/`：按日期保存的对话原文与用户提供的素材
 - `posts/`：每条帖子的四图、文案、结果与流量截图
 - `templates/`：四卡 HTML/CSS 模板
 - `docs/`：静态网页发布目录
 
 ## 公开性提醒
 
-GitHub Pages 网页通常公开可访问。当前快照包含内部策略与未来流量数据，发布前必须确认公开范围。
+GitHub Pages 网页通常公开可访问。站点使用 `noindex` 降低自然搜索曝光，但这不是访问控制。归档不得包含凭证、隐藏指令、内部推理或工具原始日志。

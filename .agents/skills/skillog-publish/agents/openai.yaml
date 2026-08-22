@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skillog Publish"
+  short_description: "Archive project conversations and assets to Skillog Pages"
+  default_prompt: "Archive this project update, rebuild Skillog Pages, and publish it to GitHub."

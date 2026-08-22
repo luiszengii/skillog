@@ -5,7 +5,11 @@ import { chromium } from "playwright";
 const root = path.resolve(import.meta.dirname, "..");
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4173";
 const exportData = JSON.parse(await fs.readFile(path.join(root, "data", "notion-export.json"), "utf8"));
+const conversationData = JSON.parse(await fs.readFile(path.join(root, "data", "conversations.json"), "utf8"));
+const metricData = JSON.parse(await fs.readFile(path.join(root, "data", "metrics.json"), "utf8"));
 const expectedDecisionCount = exportData.decisions.length;
+const expectedConversationCount = conversationData.entries.length;
+const expectedMetricCount = metricData.entries.length;
 const viewports = [
   { name: "mobile-320", width: 320, height: 720 },
   { name: "mobile-375", width: 375, height: 812 },
@@ -39,12 +43,14 @@ for (const viewport of viewports) {
     title: document.title,
     hasContent: document.body.innerText.includes("SKL-0001"),
     decisionCount: document.querySelectorAll(".decision").length,
+    conversationCount: document.querySelectorAll(".conversation-entry").length,
+    metricCount: document.querySelectorAll(".metric-entry").length,
     imageCount: document.images.length,
     brokenImages: [...document.images].filter((image) => !image.complete || image.naturalWidth === 0).map((image) => image.src),
     horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
   }));
 
-  if (consoleErrors.length || !state.hasContent || state.decisionCount !== expectedDecisionCount || state.brokenImages.length || state.horizontalOverflow) {
+  if (consoleErrors.length || !state.hasContent || state.decisionCount !== expectedDecisionCount || state.conversationCount !== expectedConversationCount || state.metricCount !== expectedMetricCount || state.brokenImages.length || state.horizontalOverflow) {
     failures.push({ viewport: viewport.name, consoleErrors, ...state });
   }
 

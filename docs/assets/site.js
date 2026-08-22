@@ -77,7 +77,44 @@ const renderMetrics = (items) => {
     $("#metrics-root").innerHTML = '<div class="empty-state"><strong>等待第一篇发布</strong><p>发布后分别在 24 小时、72 小时和 7 天写入表现快照。</p></div>';
     return;
   }
-  $("#metrics-root").innerHTML = items.map((item) => `<p>${esc(JSON.stringify(item))}</p>`).join("");
+  $("#metrics-root").innerHTML = `<div class="metric-list">${items.map((item) => {
+    const values = item.metrics ?? {};
+    const cells = Object.entries(values).map(([key, value]) => `
+      <div><dt>${esc(key)}</dt><dd>${value === null ? "待确认" : esc(value)}</dd></div>`).join("");
+    return `<article class="metric-entry">
+      <header>
+        <strong>${esc(item.contentId ?? item.id ?? "未关联内容")}</strong>
+        <span>${esc(item.window ?? "时间窗口待确认")} · ${esc(item.capturedAt ?? item.date ?? "日期待确认")}</span>
+      </header>
+      ${cells ? `<dl>${cells}</dl>` : '<p class="muted">还没有可确认的指标。</p>'}
+      ${item.sourceImage ? `<a href="${esc(item.sourceImage)}">查看原始截图 →</a>` : ""}
+    </article>`;
+  }).join("")}</div>`;
+};
+
+const renderConversations = (items) => {
+  $("#conversation-count").textContent = String(items.length).padStart(2, "0");
+  if (!items.length) {
+    $("#conversations-root").innerHTML = '<div class="empty-state"><strong>还没有归档</strong><p>下一次交流完成后，会从这里开始留下记录。</p></div>';
+    return;
+  }
+
+  $("#conversations-root").innerHTML = `<div class="conversation-list">${[...items].reverse().map((item) => `
+    <article class="conversation-entry">
+      <header>
+        <strong>${esc(item.id)}</strong>
+        <span>${esc(item.date)} · ${esc(item.timezone)}</span>
+      </header>
+      <div class="conversation-message">
+        <span>你</span>
+        <p>${esc(item.user)}</p>
+      </div>
+      <div class="conversation-message conversation-message--assistant">
+        <span>Skillog</span>
+        <p>${esc(item.assistantOutcome)}</p>
+      </div>
+      ${item.journalPath ? `<a href="${esc(item.journalPath)}">打开当天完整归档 →</a>` : ""}
+    </article>`).join("")}</div>`;
 };
 
 const renderStrategy = (items) => {
@@ -105,14 +142,25 @@ const renderNotes = (notes) => {
 };
 
 const load = async () => {
-  const response = await fetch("./data/notion-export.json");
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  const data = await response.json();
+  const [notionResponse, conversationsResponse, metricsResponse] = await Promise.all([
+    fetch("./data/notion-export.json"),
+    fetch("./data/conversations.json"),
+    fetch("./data/metrics.json")
+  ]);
+  for (const response of [notionResponse, conversationsResponse, metricsResponse]) {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  }
+  const [data, conversations, metrics] = await Promise.all([
+    notionResponse.json(),
+    conversationsResponse.json(),
+    metricsResponse.json()
+  ]);
   const exportedAt = $("#exported-at");
-  exportedAt.textContent = "Notion 快照";
+  exportedAt.textContent = "公开归档";
   exportedAt.title = `同步时间：${new Date(data.exportedAt).toLocaleString("zh-CN")}`;
   renderContent(data.content);
-  renderMetrics(data.metrics);
+  renderConversations(conversations.entries);
+  renderMetrics(metrics.entries);
   renderStrategy(data.decisions);
   renderNotes(data.notes);
 };

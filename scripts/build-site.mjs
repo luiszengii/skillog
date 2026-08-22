@@ -21,6 +21,8 @@ const copies = [
   ["site/robots.txt", "docs/robots.txt"],
   ["tokens.css", "docs/assets/tokens.css"],
   ["data/notion-export.json", "docs/data/notion-export.json"],
+  ["data/conversations.json", "docs/data/conversations.json"],
+  ["data/metrics.json", "docs/data/metrics.json"],
   ["data/notion-assets/root-01.png", "docs/assets/notion/root-01.png"],
   ["data/notion-assets/root-02.png", "docs/assets/notion/root-02.png"],
   ["posts/SKL-0001-find-skills/caption.md", "docs/assets/posts/SKL-0001/caption.md"]
@@ -35,6 +37,10 @@ for (const card of cards) copies.push([
 for (const [source, target] of copies) {
   await fs.copyFile(path.join(root, source), path.join(root, target));
 }
+
+const journalTarget = path.join(assets, "journal");
+await fs.rm(journalTarget, { recursive: true, force: true });
+await fs.cp(path.join(root, "journal"), journalTarget, { recursive: true });
 
 const zipPath = path.join(postAssets, "SKL-0001-cards.zip");
 await fs.rm(zipPath, { force: true });

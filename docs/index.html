@@ -36,6 +36,7 @@
 
       <nav class="section-index" aria-label="页面目录">
         <a href="#content">内容 <span id="content-count">—</span></a>
+        <a href="#conversations">对话 <span id="conversation-count">—</span></a>
         <a href="#metrics">数据 <span id="metric-count">—</span></a>
         <a href="#strategy">决策 <span id="decision-count">—</span></a>
         <a href="#notes">笔记 <span>02</span></a>
@@ -47,6 +48,14 @@
           <p>从候选到发布，图片可直接下载。</p>
         </header>
         <div id="content-root" aria-live="polite"></div>
+      </section>
+
+      <section id="conversations" class="rail">
+        <header class="rail-head">
+          <h2>对话记录</h2>
+          <p>只保存你和我可见的交流与最终结果。</p>
+        </header>
+        <div id="conversations-root"></div>
       </section>
 
       <section id="metrics" class="rail rail--quiet">
