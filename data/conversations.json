@@ -22,6 +22,16 @@
       ],
       "tags": ["mascot", "skill", "illustration", "brand-system"],
       "journalPath": "assets/journal/conversations/2026-08-28.md"
+    },
+    {
+      "id": "CONV-20260828-002",
+      "date": "2026-08-28",
+      "timezone": "Asia/Shanghai",
+      "user": "记得同步到 git 仓库，本地文件夹是和 github 仓储同步的吗？",
+      "assistantOutcome": "已确认当前项目目录是 luiszengii/skillog 的本地 Git 工作副本。个人全局目录中的 Skill 不会自动进入 GitHub，因此已把 skillog-robot-illustrations 的完整副本加入仓库 .agents/skills/，校验其与全局安装版本一致，并提交推送；全局版本继续用于本机直接调用，仓库版本用于版本控制和跨设备同步。",
+      "attachments": [],
+      "tags": ["git", "skill", "sync", "workflow"],
+      "journalPath": "assets/journal/conversations/2026-08-28.md"
     }
   ]
 }
