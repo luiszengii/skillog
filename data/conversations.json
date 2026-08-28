@@ -42,6 +42,16 @@
       "attachments": [],
       "tags": ["mascot", "cleanup", "git"],
       "journalPath": "assets/journal/conversations/2026-08-28.md"
+    },
+    {
+      "id": "CONV-20260828-004",
+      "date": "2026-08-28",
+      "timezone": "Asia/Shanghai",
+      "user": "我希望这个 Skill 也被放到我们的项目里面去，因为我希望在别的地方下载这个项目的时候，我也能用到里面的生成 Skillog 吉祥物图的 Skill",
+      "assistantOutcome": "已确认 skillog-robot-illustrations 的完整目录、角色基准图、提示词模板和 QA 规则均由仓库 .agents/skills/ 跟踪。补充了项目 README，说明在其他设备克隆项目后可直接调用项目级 Skill，并再次验证仓库副本完整。",
+      "attachments": [],
+      "tags": ["skill", "portability", "repository", "documentation"],
+      "journalPath": "assets/journal/conversations/2026-08-28.md"
     }
   ]
 }
