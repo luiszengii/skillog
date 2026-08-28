@@ -10,6 +10,18 @@
       "attachments": [],
       "tags": ["workflow", "github-pages", "archive"],
       "journalPath": "assets/journal/conversations/2026-08-22.md"
+    },
+    {
+      "id": "CONV-20260828-001",
+      "date": "2026-08-28",
+      "timezone": "Asia/Shanghai",
+      "user": "我对现在的角色基准图挺满意的。请用 skill-creator，参考 helloianneo/ian-xiaohei-illustrations，并将‘潦草线条改由提示词控制’落实为可复用 Skill。",
+      "assistantOutcome": "已创建可自动发现的 skillog-robot-illustrations Skill，并把批准的 v2 角色基准图作为身份锚点。Skill 将角色结构与线条松弛度分离：基准图固定头身、面屏、天线、耳罩、四肢、紫色 S 与纯净背壳；提示词只控制线条抖动、粗细变化、重描和自然不对称。技能同时包含 3:4/16:9 路由、角色规则、提示词模板与生成后 QA，并已通过结构校验。",
+      "attachments": [
+        "assets/journal/assets/2026-08-28/CONV-20260828-001/skillog-robot-reference-v2.png"
+      ],
+      "tags": ["mascot", "skill", "illustration", "brand-system"],
+      "journalPath": "assets/journal/conversations/2026-08-28.md"
     }
   ]
 }

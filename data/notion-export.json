@@ -172,6 +172,16 @@
       "decision": "GitHub Pages 公开展示完整 Notion 快照、帖子资产、策略与未来流量数据；页面设置 noindex、nofollow、noarchive、nosnippet、noimageindex，robots.txt 对所有爬虫 Disallow。",
       "reason": "主理人希望手机端直接操作与查看，并接受网页公开风险，但不希望搜索引擎带来自然流量。",
       "alternative": "公开 Pages 只展示帖子，完整策略保留在私有仓库；或不部署 Pages。"
+    },
+    {
+      "title": "Skillog 吉祥物：机器人角色基准图 v2 生效",
+      "date": "2026-08-28",
+      "type": "品牌视觉",
+      "status": "生效",
+      "impact": "高",
+      "decision": "以 v2 角色基准图固定 Skillog 机器人的头身一体结构、面屏、双眼、单天线、双耳罩、细线四肢、紫色 S 与无任何元素的纯净背壳。每次生成新配图必须携带该基准图；轻微潦草感仅由提示词调节线条抖动、粗细变化、重描与自然不对称，不得改变角色结构。",
+      "reason": "把身份结构和画风变量分开，可以在不同 Skill 场景中保持同一角色，同时延续松弛的白底手绘语言。",
+      "alternative": "每次只依赖文字描述重新生成机器人；或允许画风参考同时改变角色结构。"
     }
   ]
 }
