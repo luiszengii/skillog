@@ -42,6 +42,7 @@ for (const viewport of viewports) {
   const state = await page.evaluate(() => ({
     title: document.title,
     hasContent: document.body.innerText.includes("SKL-0001"),
+    hasMascotGuide: Boolean(document.querySelector("#mascot")) && document.body.innerText.includes("先锁角色，再换场景。"),
     decisionCount: document.querySelectorAll(".decision").length,
     conversationCount: document.querySelectorAll(".conversation-entry").length,
     metricCount: document.querySelectorAll(".metric-entry").length,
@@ -50,7 +51,7 @@ for (const viewport of viewports) {
     horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1
   }));
 
-  if (consoleErrors.length || !state.hasContent || state.decisionCount !== expectedDecisionCount || state.conversationCount !== expectedConversationCount || state.metricCount !== expectedMetricCount || state.brokenImages.length || state.horizontalOverflow) {
+  if (consoleErrors.length || !state.hasContent || !state.hasMascotGuide || state.decisionCount !== expectedDecisionCount || state.conversationCount !== expectedConversationCount || state.metricCount !== expectedMetricCount || state.brokenImages.length || state.horizontalOverflow) {
     failures.push({ viewport: viewport.name, consoleErrors, ...state });
   }
 
@@ -58,6 +59,9 @@ for (const viewport of viewports) {
     const button = page.getByRole("button", { name: "复制标题" });
     await button.click();
     await page.waitForFunction(() => document.querySelector("[data-copy-title]")?.textContent === "已复制");
+    const mascotButton = page.getByRole("button", { name: "复制指令" });
+    await mascotButton.click();
+    await page.waitForFunction(() => document.querySelector("[data-copy-mascot-prompt]")?.textContent === "已复制");
   }
 
   if (viewport.name === "mobile-375" || viewport.name === "desktop-1440") {
@@ -72,6 +76,11 @@ for (const viewport of viewports) {
 const zipResponse = await fetch(`${baseUrl}/assets/posts/SKL-0001/SKL-0001-cards.zip`);
 if (!zipResponse.ok || Number(zipResponse.headers.get("content-length") ?? 0) === 0) {
   failures.push({ download: "SKL-0001-cards.zip", status: zipResponse.status });
+}
+
+const mascotResponse = await fetch(`${baseUrl}/assets/mascot/skillog-robot-reference-v2.png`);
+if (!mascotResponse.ok || Number(mascotResponse.headers.get("content-length") ?? 0) === 0) {
+  failures.push({ download: "skillog-robot-reference-v2.png", status: mascotResponse.status });
 }
 
 await browser.close();

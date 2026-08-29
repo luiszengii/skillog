@@ -22,6 +22,9 @@ const copyText = async (button, text, idleLabel) => {
   window.setTimeout(() => setCopyState(button, "idle", idleLabel), 1400);
 };
 
+const mascotPrompt = "Use $skillog-robot-illustrations 为「Skill 名称」生成一张 3:4 的 Skillog 吉祥物手绘配图。核心结果是「想表达的结果」，让机器人亲自完成「具体动作」。";
+$('[data-copy-mascot-prompt]').addEventListener("click", (event) => copyText(event.currentTarget, mascotPrompt, "复制指令"));
+
 const renderContent = (items) => {
   $("#content-count").textContent = String(items.length).padStart(2, "0");
   if (!items.length) {

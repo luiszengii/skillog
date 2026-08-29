@@ -11,6 +11,7 @@ const postAssets = path.join(assets, "posts", "SKL-0001");
 
 await fs.mkdir(path.join(docs, "data"), { recursive: true });
 await fs.mkdir(path.join(assets, "notion"), { recursive: true });
+await fs.mkdir(path.join(assets, "mascot"), { recursive: true });
 await fs.mkdir(postAssets, { recursive: true });
 
 const copies = [
@@ -25,6 +26,7 @@ const copies = [
   ["data/metrics.json", "docs/data/metrics.json"],
   ["data/notion-assets/root-01.png", "docs/assets/notion/root-01.png"],
   ["data/notion-assets/root-02.png", "docs/assets/notion/root-02.png"],
+  ["assets/mascot/skillog-robot-reference-v2.png", "docs/assets/mascot/skillog-robot-reference-v2.png"],
   ["posts/SKL-0001-find-skills/caption.md", "docs/assets/posts/SKL-0001/caption.md"]
 ];
 

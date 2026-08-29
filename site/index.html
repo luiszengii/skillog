@@ -35,12 +35,59 @@
       </section>
 
       <nav class="section-index" aria-label="页面目录">
+        <a href="#mascot">吉祥物 <span>V2</span></a>
         <a href="#content">内容 <span id="content-count">—</span></a>
         <a href="#conversations">对话 <span id="conversation-count">—</span></a>
         <a href="#metrics">数据 <span id="metric-count">—</span></a>
         <a href="#strategy">决策 <span id="decision-count">—</span></a>
         <a href="#notes">笔记 <span>02</span></a>
       </nav>
+
+      <section id="mascot" class="rail mascot-rail">
+        <header class="rail-head">
+          <h2>Skillog 吉祥物</h2>
+          <p>一张基准图锁定角色，一条指令切换不同 Skill 场景。</p>
+        </header>
+
+        <div class="mascot-layout">
+          <figure class="mascot-sheet">
+            <a href="./assets/mascot/skillog-robot-reference-v2.png" download>
+              <img src="./assets/mascot/skillog-robot-reference-v2.png" alt="Skillog 机器人 v2 角色基准图，包含正面、侧面、背面和六种基础动作" width="1536" height="1024" />
+            </a>
+            <figcaption>
+              <span>角色基准图 · v2</span>
+              <a href="./assets/mascot/skillog-robot-reference-v2.png" download>下载原图 ↓</a>
+            </figcaption>
+          </figure>
+
+          <div class="mascot-guide">
+            <div>
+              <p class="kicker">PROJECT SKILL</p>
+              <h3>先锁角色，再换场景。</h3>
+              <p>项目内置 <code>$skillog-robot-illustrations</code>。它会自动携带基准图，固定机器人的头身、面屏、天线、耳罩、紫色 S 与纯净背壳；轻微潦草感只由提示词控制，不改变角色结构。</p>
+            </div>
+
+            <ol class="usage-steps">
+              <li><span>01</span><div><strong>下载或克隆项目</strong><p>完整 Skill 位于 <code>.agents/skills/</code>，会随 Git 仓库一起保存。</p></div></li>
+              <li><span>02</span><div><strong>在 Codex 中打开项目</strong><p>Codex 会识别项目级 Skill，不需要重新寻找角色设定。</p></div></li>
+              <li><span>03</span><div><strong>说清一个结果和动作</strong><p>默认生成 3:4 小红书配图；文章正文图可指定为 16:9。</p></div></li>
+            </ol>
+
+            <div class="prompt-card">
+              <div class="prompt-card__head">
+                <span>可直接复制</span>
+                <button type="button" data-copy-mascot-prompt>复制指令</button>
+              </div>
+              <code>Use $skillog-robot-illustrations 为「Skill 名称」生成一张 3:4 的 Skillog 吉祥物手绘配图。核心结果是「想表达的结果」，让机器人亲自完成「具体动作」。</code>
+            </div>
+
+            <div class="actions mascot-actions">
+              <a class="button" href="https://github.com/luiszengii/skillog/tree/main/.agents/skills/skillog-robot-illustrations">查看完整 Skill</a>
+              <a class="button" href="./assets/mascot/skillog-robot-reference-v2.png" download>下载基准图</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section id="content" class="rail">
         <header class="rail-head">

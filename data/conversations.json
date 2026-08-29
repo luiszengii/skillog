@@ -64,6 +64,16 @@
       ],
       "tags": ["mascot", "illustration", "grill-me", "image-generation"],
       "journalPath": "assets/journal/conversations/2026-08-28.md"
+    },
+    {
+      "id": "CONV-20260829-001",
+      "date": "2026-08-29",
+      "timezone": "Asia/Shanghai",
+      "user": "蛮好的， 使用方法也帮我放在我的最总网页上去，包括角色基准图",
+      "assistantOutcome": "已在 Skillog 最终网页新增独立的‘Skillog 吉祥物’区域，展示 v2 角色基准图、原图下载、三步使用方法、可复制调用指令和 GitHub 完整 Skill 入口。基准图已进入静态网站构建流程，并针对移动端与桌面端分别优化布局。",
+      "attachments": [],
+      "tags": ["mascot", "website", "documentation", "skill"],
+      "journalPath": "assets/journal/conversations/2026-08-29.md"
     }
   ]
 }
