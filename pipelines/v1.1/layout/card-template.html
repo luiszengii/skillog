@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>万术录 Skillog · v1.1 变体模板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./card-template.css" />
+  </head>
+  <body>
+    <article id="card" class="card" aria-live="polite"></article>
+    <script>
+      const esc = (value = "") => String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+      const renderResults = (items, limit = items.length) => items.slice(0, limit).map((item) => `
+        <div class="result-row">
+          <span class="result-row__name">${esc(item.name)}</span>
+          <span class="result-row__count">${esc(item.installs)}</span>
+        </div>`).join("");
+
+      const masthead = (post) => `
+        <header class="masthead">
+          <p class="masthead__index">INDEX ${esc(post.index)}</p>
+          <p class="masthead__name">万术录</p>
+        </header>`;
+
+      const templates = {
+        cover(post, card) {
+          return `
+            ${masthead(post)}
+            <main class="body cover">
+              <section class="cover__copy">
+                <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
+                <h1 class="headline">${esc(card.title)}</h1>
+                <p class="lede">${esc(card.lede)}</p>
+                <div class="meta-row"><span>${esc(post.installs)} installs</span><span>${esc(post.source)}</span></div>
+              </section>
+              <figure class="cover__art">
+                <img src="${esc(post.illustrationUrl)}" alt="${esc(post.illustrationAlt)}" />
+              </figure>
+            </main>`;
+        },
+        result(post, card) {
+          return `
+            ${masthead(post)}
+            <main class="body result-page">
+              <section>
+                <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
+                <h1 class="headline">${esc(card.title)}</h1>
+                <p class="lede">${esc(card.lede)}</p>
+              </section>
+              <section class="result-panel">
+                <div class="result-panel__head"><h2>输入：${esc(post.queryLabel)}</h2><code>npx skills find</code></div>
+                <div class="result-list">${renderResults(post.results, card.resultLimit ?? 7)}</div>
+              </section>
+              <section class="result-page__stats">
+                <div class="stat"><strong>${esc(post.resultCount)}</strong><span>本次返回的候选 Skill</span></div>
+                <div class="stat"><strong>${esc(post.topInstall)}</strong><span>结果列表中的最高安装量</span></div>
+              </section>
+            </main>`;
+        },
+        intro(post, card) {
+          return `
+            ${masthead(post)}
+            <main class="body intro-page">
+              <section>
+                <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
+                <h1 class="headline">${esc(card.title)}</h1>
+                <p class="lede">${esc(card.lede)}</p>
+              </section>
+              <section class="steps">
+                ${card.steps.map((step, index) => `
+                  <div class="step">
+                    <span class="step__number">0${index + 1}</span>
+                    <div><h3>${esc(step.title)}</h3><p>${esc(step.copy)}</p></div>
+                  </div>`).join("")}
+              </section>
+              <p class="fit-line"><strong>适合：</strong>${esc(card.fit)}</p>
+            </main>`;
+        },
+        access(post, card) {
+          return `
+            ${masthead(post)}
+            <main class="body access-page">
+              <section>
+                <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
+                <h1 class="headline">${esc(card.title)}</h1>
+              </section>
+              <section class="command-block"><p>INSTALL</p><code>${esc(post.install)}</code></section>
+              <dl class="specs">
+                ${card.specs.map((spec) => `<div class="spec"><dt>${esc(spec.label)}</dt><dd>${esc(spec.value)}</dd></div>`).join("")}
+              </dl>
+              <aside class="audit-note"><strong>审计提示</strong><p>${esc(card.audit)}</p></aside>
+            </main>`;
+        }
+      };
+
+      function fitPreview() {
+        const card = document.querySelector("#card");
+        if (!card) return;
+        const scale = Math.min(1, window.innerWidth / 1080);
+        card.style.transform = `scale(${scale})`;
+        document.body.style.height = `${1440 * scale}px`;
+      }
+
+      window.renderSkillogCard = async (post, index) => {
+        const cardData = post.cards[index];
+        const card = document.querySelector("#card");
+        const variant = post.layout?.resolvedVariants?.[cardData.kind] ?? "base";
+        card.className = `card card--${cardData.kind} variant--${variant}`;
+        card.dataset.variant = variant;
+        card.innerHTML = templates[cardData.kind](post, cardData);
+        fitPreview();
+        await document.fonts.ready;
+        await Promise.all([...document.images].map((image) => image.decode().catch(() => undefined)));
+        document.documentElement.dataset.ready = "true";
+      };
+
+      window.addEventListener("resize", fitPreview);
+    </script>
+  </body>
+</html>

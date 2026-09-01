@@ -6,7 +6,9 @@
   "scripts": {
     "build:site": "node website/scripts/build-site.mjs",
     "render:cards": "node pipelines/v1/scripts/render-cards.mjs",
+    "render:cards:v1.1": "node pipelines/v1.1/scripts/render-cards.mjs",
     "verify:cards": "node pipelines/v1/scripts/verify-cards.mjs",
+    "verify:cards:v1.1": "node pipelines/v1.1/scripts/verify-cards.mjs",
     "verify:site": "node website/scripts/verify-site.mjs"
   },
   "devDependencies": {

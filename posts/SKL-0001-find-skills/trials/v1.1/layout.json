@@ -1,0 +1,6 @@
+{
+  "pipelineVersion": "v1.1-trial",
+  "seed": 1,
+  "cards": ["result", "intro", "access"],
+  "outputDir": "cards"
+}

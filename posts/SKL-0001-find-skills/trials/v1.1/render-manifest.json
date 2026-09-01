@@ -1,0 +1,15 @@
+{
+  "pipelineVersion": "v1.1-trial",
+  "post": "SKL-0001",
+  "seed": 1,
+  "cards": [
+    "result",
+    "intro",
+    "access"
+  ],
+  "resolvedVariants": {
+    "result": "split-stats",
+    "intro": "staggered-steps",
+    "access": "inline-audit"
+  }
+}

@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-09-02",
+    "macrostructure": "Workbench variation",
+    "theme": "Skillog Editorial",
+    "enrichment": "none on interior cards",
+    "brief": "v1.1 trial with seeded density, stagger and grouping variants for Find Skills cards 02-04"
+  },
+  {
     "date": "2026-09-01",
     "macrostructure": "Workbench",
     "theme": "Skillog Editorial",
