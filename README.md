@@ -1,38 +1,43 @@
 # 万术录 Skillog
 
-每日 AI Skill 的内容、数据与决策档案。
+项目只维护三个业务目录：帖子、版本化内容流水线、静态网站。
 
-## 构建 GitHub Pages
+```text
+posts/                 一帖一目录；文案、Skill、配图、帖子数据、成品图全部内聚
+pipelines/             每个流水线版本一个目录；当前正式版为 v1
+website/               GitHub Pages 的源码、站点级数据、历史公开归档与构建脚本
+docs/                  自动生成的 Pages 发布目录，不直接编辑
+```
+
+## 帖子目录
+
+每篇帖子使用 `posts/<content-id>-<slug>/`：
+
+```text
+artwork/               该帖首页配图
+cards/                 渲染完成的每一页 PNG
+content/               发布文案
+data/                  帖子 JSON、实测结果、后续表现数据
+skill/                 帖子介绍的 Skill 本体与来源快照
+```
+
+## 流水线目录
+
+`pipelines/v1/` 同时定义文案风格、机器人配图规则、排版样式、渲染脚本和校验脚本。以后调整成新风格时新增 `pipelines/v2/`，不覆盖 v1。
+
+Codex 仍可通过 `.agents/skills/skillog-robot-illustrations` 自动发现机器人配图 Skill；该路径是指向 v1 流水线内真实文件的入口。
+
+## 常用命令
 
 ```bash
 npm install
+npm run render:cards -- posts/SKL-0001-find-skills/data/post.json
+npm run verify:cards
 npm run build:site
 ```
 
-构建结果位于 `docs/`，可由 GitHub Pages 从 `main` 分支的 `/docs` 目录发布。
-
-## 数据分工
-
-- `data/notion-export.json`：Notion 结构化数据快照
-- `data/conversations.json`：用户可见对话与结果索引
-- `data/metrics.json`：流量快照的结构化指标
-- `journal/`：按日期保存的对话原文与用户提供的素材
-- `posts/`：每条帖子的四图、专属插画、文案、结果与流量截图
-- `templates/`：四卡 HTML/CSS 模板
-- `docs/`：静态网页发布目录
-
-## 项目级 Skill
-
-仓库自带 `.agents/skills/skillog-robot-illustrations/`。在其他设备克隆本项目后，Codex 可以直接将它识别为项目级 Skill，无需依赖原电脑的全局 Skill 目录。
-
-调用示例：
-
-```text
-Use $skillog-robot-illustrations 为这个 Skill 生成一张 3:4 的 Skillog 吉祥物手绘配图。
-```
-
-角色基准图、角色结构规则、提示词模板和生成后检查表均已包含在该 Skill 目录中。
+GitHub Pages 从 `main:/docs` 发布。`docs/` 由构建脚本完全重建，不应手工维护。
 
 ## 公开性提醒
 
-GitHub Pages 网页通常公开可访问。站点使用 `noindex` 降低自然搜索曝光，但这不是访问控制。归档不得包含凭证、隐藏指令、内部推理或工具原始日志。
+GitHub Pages 可公开访问。站点使用 `noindex` 降低自然搜索曝光，但这不是访问控制；不得归档凭证、隐藏指令、内部推理或工具原始日志。

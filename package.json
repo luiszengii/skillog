@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:site": "node scripts/build-site.mjs",
-    "render:cards": "node scripts/render-cards.mjs",
-    "verify:cards": "node scripts/verify-template.mjs",
-    "verify:site": "node scripts/verify-site.mjs"
+    "build:site": "node website/scripts/build-site.mjs",
+    "render:cards": "node pipelines/v1/scripts/render-cards.mjs",
+    "verify:cards": "node pipelines/v1/scripts/verify-cards.mjs",
+    "verify:site": "node website/scripts/verify-site.mjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
