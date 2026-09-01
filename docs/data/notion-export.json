@@ -30,7 +30,7 @@
       "type": "Agent Skill",
       "status": "待你发布",
       "discoveredAt": "2026-08-21",
-      "templateVersion": "v0.2",
+      "templateVersion": "v1.0",
       "title": "find-skills｜一句话找到 AI Skill",
       "hook": "想找好用的 Skill，不用再翻 GitHub",
       "singleResult": "用一句关键词搜索适合自己的 Agent Skill",
@@ -40,6 +40,7 @@
       "heat": "skills.sh 约 300 万安装；源仓库约 2.93 万 Star（2026-08-21 快照）",
       "verification": "L2 可执行",
       "archivePath": "posts/SKL-0001-find-skills",
+      "illustrationPath": "posts/SKL-0001-find-skills/find-skills-illustration-v1.png",
       "cards": [
         "assets/posts/SKL-0001/01-cover.png",
         "assets/posts/SKL-0001/02-result.png",
@@ -182,6 +183,16 @@
       "decision": "以 v2 角色基准图固定 Skillog 机器人的头身一体结构、面屏、双眼、单天线、双耳罩、细线四肢、紫色 S 与无任何元素的纯净背壳。每次生成新配图必须携带该基准图；轻微潦草感仅由提示词调节线条抖动、粗细变化、重描与自然不对称，不得改变角色结构。",
       "reason": "把身份结构和画风变量分开，可以在不同 Skill 场景中保持同一角色，同时延续松弛的白底手绘语言。",
       "alternative": "每次只依赖文字描述重新生成机器人；或允许画风参考同时改变角色结构。"
+    },
+    {
+      "title": "四卡模板 v1.0：移动端精简表头与帖子内聚素材",
+      "date": "2026-09-01",
+      "type": "模板决策",
+      "status": "生效",
+      "impact": "高",
+      "decision": "四卡仅保留左上角 INDEX 与右上角万术录；移除日期、页码和页脚。每篇帖子的专属配图与内容文件放在同一帖子目录，封面以放大的场景配图作为主要视觉。",
+      "reason": "小红书已经提供浏览时间与页序信息，模板重复展示会增加手机端噪音；素材内聚也更便于单篇内容归档和复用。",
+      "alternative": "继续使用 v0.2 的日期、页码、页脚，以及仓库根目录 assets 中的分散配图。"
     }
   ]
 }

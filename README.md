@@ -17,7 +17,7 @@ npm run build:site
 - `data/conversations.json`：用户可见对话与结果索引
 - `data/metrics.json`：流量快照的结构化指标
 - `journal/`：按日期保存的对话原文与用户提供的素材
-- `posts/`：每条帖子的四图、文案、结果与流量截图
+- `posts/`：每条帖子的四图、专属插画、文案、结果与流量截图
 - `templates/`：四卡 HTML/CSS 模板
 - `docs/`：静态网页发布目录
 

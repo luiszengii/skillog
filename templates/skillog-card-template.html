@@ -24,42 +24,31 @@
           <span class="result-row__count">${esc(item.installs)}</span>
         </div>`).join("");
 
-      const masthead = (post, page) => `
+      const masthead = (post) => `
         <header class="masthead">
-          <p class="masthead__issue">${esc(post.id)} · ${esc(post.date)}</p>
+          <p class="masthead__index">INDEX ${esc(post.index)}</p>
           <p class="masthead__name">万术录</p>
-          <p class="masthead__page">${esc(page)} / 04</p>
         </header>`;
-
-      const footer = (post, label) => `
-        <footer class="footer">
-          <p>万术录 · ${esc(post.id)}</p>
-          <p>${esc(label)}</p>
-        </footer>`;
 
       const templates = {
         cover(post, card) {
           return `
-            ${masthead(post, card.page)}
+            ${masthead(post)}
             <main class="body cover">
               <section class="cover__copy">
-                <div>
-                  <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
-                  <h1 class="headline">${esc(card.title)}</h1>
-                  <p class="lede">${esc(card.lede)}</p>
-                  <div class="meta-row"><span>${esc(post.installs)} installs</span><span>${esc(post.source)}</span></div>
-                </div>
+                <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
+                <h1 class="headline">${esc(card.title)}</h1>
+                <p class="lede">${esc(card.lede)}</p>
+                <div class="meta-row"><span>${esc(post.installs)} installs</span><span>${esc(post.source)}</span></div>
               </section>
-              <section class="result-panel" aria-label="真实搜索结果">
-                <div class="result-panel__head"><h2>真实搜索结果</h2><code>${esc(post.query)}</code></div>
-                <div class="result-list">${renderResults(post.results, 3)}</div>
-              </section>
-            </main>
-            ${footer(post, "直接封面")}`;
+              <figure class="cover__art">
+                <img src="${esc(post.illustrationUrl)}" alt="${esc(post.illustrationAlt)}" />
+              </figure>
+            </main>`;
         },
         result(post, card) {
           return `
-            ${masthead(post, card.page)}
+            ${masthead(post)}
             <main class="body result-page">
               <section>
                 <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
@@ -74,12 +63,11 @@
                 <div class="stat"><strong>${esc(post.resultCount)}</strong><span>本次返回的候选 Skill</span></div>
                 <div class="stat"><strong>${esc(post.topInstall)}</strong><span>结果列表中的最高安装量</span></div>
               </section>
-            </main>
-            ${footer(post, "结果展示")}`;
+            </main>`;
         },
         intro(post, card) {
           return `
-            ${masthead(post, card.page)}
+            ${masthead(post)}
             <main class="body intro-page">
               <section>
                 <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
@@ -94,12 +82,11 @@
                   </div>`).join("")}
               </section>
               <p class="fit-line"><strong>适合：</strong>${esc(card.fit)}</p>
-            </main>
-            ${footer(post, "轻量介绍")}`;
+            </main>`;
         },
         access(post, card) {
           return `
-            ${masthead(post, card.page)}
+            ${masthead(post)}
             <main class="body access-page">
               <section>
                 <p class="skill-name"><span class="accent-tick"></span>${esc(post.skill)}</p>
@@ -110,8 +97,7 @@
                 ${card.specs.map((spec) => `<div class="spec"><dt>${esc(spec.label)}</dt><dd>${esc(spec.value)}</dd></div>`).join("")}
               </dl>
               <aside class="audit-note"><strong>审计提示</strong><p>${esc(card.audit)}</p></aside>
-            </main>
-            ${footer(post, "获取入口")}`;
+            </main>`;
         }
       };
 
@@ -129,6 +115,7 @@
         card.innerHTML = templates[cardData.kind](post, cardData);
         fitPreview();
         await document.fonts.ready;
+        await Promise.all([...document.images].map((image) => image.decode().catch(() => undefined)));
         document.documentElement.dataset.ready = "true";
       };
 

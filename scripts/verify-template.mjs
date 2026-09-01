@@ -5,6 +5,7 @@ import { chromium } from "playwright";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const post = JSON.parse(await fs.readFile(path.join(projectRoot, "posts/SKL-0001-find-skills/post.json"), "utf8"));
+post.illustrationUrl = pathToFileURL(path.join(projectRoot, "posts/SKL-0001-find-skills", post.illustration)).href;
 const templateUrl = pathToFileURL(path.join(projectRoot, "templates/skillog-card-template.html")).href;
 const widths = [320, 375, 414, 768, 1080];
 

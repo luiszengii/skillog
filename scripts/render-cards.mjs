@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
@@ -8,6 +9,9 @@ const post = JSON.parse(await fs.readFile(postFile, "utf8"));
 const outputDir = path.resolve(path.dirname(postFile), "cards");
 const templateUrl = pathToFileURL(path.resolve(projectRoot, "templates/skillog-card-template.html")).href;
 
+if (!post.illustration) throw new Error(`Missing illustration in ${postFile}`);
+post.illustrationUrl = pathToFileURL(path.resolve(path.dirname(postFile), post.illustration)).href;
+
 await fs.mkdir(outputDir, { recursive: true });
 
 const browser = await chromium.launch({
@@ -15,14 +19,13 @@ const browser = await chromium.launch({
   ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {})
 });
 
-const context = await browser.newContext({
-  viewport: { width: 1080, height: 1440 },
-  deviceScaleFactor: 1
-});
-const page = await context.newPage();
-await page.goto(templateUrl, { waitUntil: "networkidle" });
-
 for (let index = 0; index < post.cards.length; index += 1) {
+  const context = await browser.newContext({
+    viewport: { width: 1080, height: 1440 },
+    deviceScaleFactor: 1
+  });
+  const page = await context.newPage();
+  await page.goto(templateUrl, { waitUntil: "networkidle" });
   await page.evaluate(({ postData, cardIndex }) => window.renderSkillogCard(postData, cardIndex), {
     postData: post,
     cardIndex: index
@@ -30,6 +33,7 @@ for (let index = 0; index < post.cards.length; index += 1) {
   await page.waitForFunction(() => document.documentElement.dataset.ready === "true");
   const filename = `${String(index + 1).padStart(2, "0")}-${post.cards[index].kind}.png`;
   await page.locator("#card").screenshot({ path: path.join(outputDir, filename) });
+  await context.close();
 }
 
 await browser.close();

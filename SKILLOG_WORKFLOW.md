@@ -13,6 +13,14 @@ For every conversation in this project, archive the user-visible exchange before
 - Stage only the exact authorized files, scan them for secrets, commit, and push a fast-forward update to `origin/main`.
 - Verify Pages after material site changes.
 
+## Content cards v1.0
+
+- Keep each post's `post.json`, caption, results, illustration, and rendered `cards/` together under `posts/<content-id>-<slug>/`.
+- Keep post-specific illustrations out of the repository-level `assets/`; that directory is reserved for shared brand assets.
+- The card masthead contains only `INDEX <number>` at top left and `万术录` at top right.
+- Do not render dates, page counters, or card footers. Xiaohongshu supplies its own browsing chrome.
+- Render all four 1080 × 1440 cards with `node scripts/render-cards.mjs posts/<content-id>-<slug>/post.json` before publishing.
+
 ## Never publish
 
 - System or developer messages
