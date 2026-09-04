@@ -1,6 +1,6 @@
-/* Hallmark · genre: editorial · macrostructure: Workbench variation · theme: Skillog Editorial · knobs: density + stagger + grouping · enrichment: none on interior cards · nav: N6 masthead · footer: none · contrast: pass (40–41) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
-/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
-/* Skillog card system v1.1 trial · content-height modules · seeded layout variants · formal v1 untouched */
+/* Hallmark · genre: editorial · macrostructure: Workbench fixed · theme: Skillog Editorial · knobs: compact density + shared alignment · enrichment: approved mascot on cover only · nav: N6 masthead · footer: none · contrast: pass (40–41) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+/* Skillog card system v1.1 trial · fixed compact layout · no randomness · formal v1 untouched */
 @import url("./tokens.css");
 
 * {
@@ -135,7 +135,7 @@ body {
 .result-panel {
   align-self: start;
   min-height: 0;
-  padding: 28px 32px;
+  padding: 36px 36px 32px;
   border: var(--rule-hair) solid var(--color-rule);
   border-radius: var(--radius-frame);
   background: var(--color-paper-2);
@@ -211,7 +211,7 @@ body {
 
 .result-page__stats {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 40px;
 }
 
@@ -255,9 +255,9 @@ body {
 
 .step {
   display: grid;
-  grid-template-columns: 100px minmax(0, 1fr);
+  grid-template-columns: 88px minmax(0, 1fr);
   gap: 32px;
-  padding-block: 36px;
+  padding-block: 44px;
   border-block-start: var(--rule-hair) solid var(--color-rule);
 }
 
@@ -306,7 +306,7 @@ body {
 }
 
 .command-block {
-  padding: 32px;
+  padding: 44px 36px;
   border-block: var(--rule-strong) solid var(--color-ink);
   background: var(--color-paper-2);
 }
@@ -334,7 +334,7 @@ body {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
   gap: 32px;
-  padding-block: 24px;
+  padding-block: 36px;
   border-block-end: var(--rule-hair) solid var(--color-rule);
 }
 
@@ -354,8 +354,9 @@ body {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 24px;
-  align-items: start;
-  padding: 24px 28px;
+  align-items: center;
+  min-height: 136px;
+  padding: 36px 32px;
   border: var(--rule-hair) solid var(--color-warning);
   color: var(--color-ink-2);
 }
@@ -369,81 +370,6 @@ body {
   margin: 0;
   font-size: 24px;
   line-height: 1.55;
-}
-
-/* Seeded variants deliberately change only density and grouping. */
-.variant--dense-ledger .result-panel {
-  padding: 36px 36px 32px;
-}
-
-.variant--dense-ledger .result-row {
-  padding-block: 20px;
-}
-
-.variant--dense-ledger .result-page__stats {
-  gap: 56px;
-}
-
-.variant--split-stats .result-page__stats {
-  grid-template-columns: 0.82fr 1.18fr;
-  margin-inline-start: 84px;
-}
-
-.variant--split-stats .stat:nth-child(2) {
-  margin-block-start: 24px;
-}
-
-.variant--staggered-steps .step {
-  grid-template-columns: 86px minmax(0, 1fr);
-  padding-block: 44px;
-}
-
-.variant--staggered-steps .step:nth-child(2) > div {
-  margin-inline-start: 56px;
-}
-
-.variant--staggered-steps .step:nth-child(3) > div {
-  margin-inline-start: 20px;
-}
-
-.variant--number-rail .steps {
-  border-inline-start: var(--rule-strong) solid var(--color-ink);
-  padding-inline-start: 32px;
-}
-
-.variant--number-rail .step {
-  grid-template-columns: 72px minmax(0, 1fr);
-  padding-block: 40px;
-}
-
-.variant--inline-audit .command-block {
-  padding: 44px 36px;
-}
-
-.variant--inline-audit .spec {
-  padding-block: 36px;
-}
-
-.variant--inline-audit .audit-note {
-  margin-block-start: -8px;
-  min-height: 136px;
-  padding: 36px 32px;
-  align-items: center;
-}
-
-.variant--split-command .command-block {
-  display: grid;
-  grid-template-columns: 160px minmax(0, 1fr);
-  gap: 28px;
-  align-items: baseline;
-}
-
-.variant--split-command .command-block p {
-  margin: 0;
-}
-
-.variant--split-command .specs {
-  margin-inline-start: 76px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>万术录 Skillog · v1.1 变体模板</title>
+    <title>万术录 Skillog · v1.1 固定紧凑模板</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" />
@@ -112,9 +112,7 @@
       window.renderSkillogCard = async (post, index) => {
         const cardData = post.cards[index];
         const card = document.querySelector("#card");
-        const variant = post.layout?.resolvedVariants?.[cardData.kind] ?? "base";
-        card.className = `card card--${cardData.kind} variant--${variant}`;
-        card.dataset.variant = variant;
+        card.className = `card card--${cardData.kind}`;
         card.innerHTML = templates[cardData.kind](post, cardData);
         fitPreview();
         await document.fonts.ready;

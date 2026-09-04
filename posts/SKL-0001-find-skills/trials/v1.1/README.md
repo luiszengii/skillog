@@ -2,8 +2,8 @@
 
 本目录只保存 `SKL-0001 find-skills` 的 v1.1 试稿，不覆盖 `../../cards/` 中的正式 v1 成图。
 
-- `layout.json`：输入 seed 与待渲染页面
-- `render-manifest.json`：渲染时实际选中的版式变体
-- `cards/`：第 02–04 页试稿 PNG
+- `layout.json`：固定排版名称与待渲染页面
+- `render-manifest.json`：本次渲染使用的固定排版记录
+- `cards/`：第 01–04 页试稿 PNG
 
-相同 seed 会得到相同版式。用户确认后，才将选中规则升级到正式流水线和帖子成图。
+v1.1 不使用随机数或 seed。相同内容始终得到相同版式；用户确认后，才将固定规则升级到正式流水线和帖子成图。

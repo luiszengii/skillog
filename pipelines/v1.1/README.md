@@ -1,6 +1,6 @@
-# Skillog 内容流水线 v1.1（试稿）
+# Skillog 内容流水线 v1.1（固定紧凑试稿）
 
-这是从正式 v1 分出的试稿流水线。它保留 v1 的文案、配图与视觉系统，只调整第 02–04 页的内容密度，并为每种页面提供两套受控版式。正式 v1 不受影响。
+这是从正式 v1 分出的固定紧凑试稿流水线。它保留 v1 的文案、配图与视觉系统，减少第 02–04 页的无信息留白，并统一文字和分隔线的对齐关系。正式 v1 不受影响。
 
 ```text
 content-style.md        选题、文案语气和信息边界
@@ -15,13 +15,9 @@ WORKFLOW.md             从帖子到网站发布的操作约束
 
 设计基线仍是手机端优先，表头仅保留左上角 `INDEX` 与右上角“万术录”；不显示日期、页码或页尾。
 
-## 可复现的版式变化
+## 固定排版规则
 
-`seed + 帖子 ID + 页面类型` 会从预先审定的变体中选出布局。相同 seed 重渲染结果完全一致；需要精确锁定时，也可以在试稿配置的 `variants` 中指定名称。
-
-- `result`：`dense-ledger` / `split-stats`
-- `intro`：`staggered-steps` / `number-rail`
-- `access`：`inline-audit` / `split-command`
+v1.1 不使用随机数、seed 或版式变体。相同内容始终生成相同布局：结果页双列统计等高对齐，步骤页所有正文使用同一左边界，安装页按命令、规格、审计顺序紧凑排列。
 
 每条帖子使用一个 `post.json` 驱动四张 1080 × 1440 PNG：
 
@@ -35,7 +31,7 @@ WORKFLOW.md             从帖子到网站发布的操作约束
 ```json
 {
   "index": "001",
-  "templateVersion": "v1.1-trial",
+  "templateVersion": "v1.1-fixed",
   "illustration": "../artwork/find-skills-illustration-v1.png",
   "illustrationAlt": "插画说明"
 }
@@ -55,6 +51,6 @@ npm run render:cards:v1.1 -- posts/SKL-0001-find-skills/data/post.json posts/SKL
 npm run verify:cards:v1.1 -- posts/SKL-0001-find-skills/data/post.json posts/SKL-0001-find-skills/trials/v1.1/layout.json
 ```
 
-试稿只写入 `posts/<post>/trials/v1.1/`，不要覆盖正式 `cards/`。用户确认后，再把选中的规则升级为下一版正式流水线。
+试稿只写入 `posts/<post>/trials/v1.1/`，不要覆盖正式 `cards/`。配置默认渲染图一至图四；用户确认后，再把固定规则升级为正式流水线。
 
 新帖子复制现有帖子目录骨架，修改内容编号、来源、真实数据与四卡文案。不要编造安装量、效果或安全结论。

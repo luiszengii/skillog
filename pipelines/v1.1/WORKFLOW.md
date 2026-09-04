@@ -13,14 +13,15 @@ For every conversation in this project, archive the user-visible exchange before
 - Stage only the exact authorized files, scan them for secrets, commit, and push a fast-forward update to `origin/main`.
 - Verify Pages after material site changes.
 
-## Content cards v1.1 trial
+## Content cards v1.1 fixed trial
 
 - Keep each post's `content/`, `skill/`, `artwork/`, `data/`, and rendered `cards/` together under `posts/<content-id>-<slug>/`.
 - Keep all structured data that belongs to one post under that post's `data/`; the website build reads it from there rather than maintaining a second copy.
 - The card masthead contains only `INDEX <number>` at top left and `万术录` at top right.
 - Do not render dates, page counters, or card footers. Xiaohongshu supplies its own browsing chrome.
 - Keep trial inputs and outputs under `posts/<content-id>-<slug>/trials/v1.1/`; never overwrite the formal `cards/` directory during review.
-- Render the selected 1080 × 1440 trial cards with `npm run render:cards:v1.1 -- posts/<content-id>-<slug>/data/post.json posts/<content-id>-<slug>/trials/v1.1/layout.json`.
+- Use one fixed compact layout. Do not select layouts with randomness, seeds, or per-post variants.
+- Render all four 1080 × 1440 trial cards with `npm run render:cards:v1.1 -- posts/<content-id>-<slug>/data/post.json posts/<content-id>-<slug>/trials/v1.1/layout.json`.
 - Require the layout config path. The v1.1 renderer must fail closed when it is missing.
 
 ## Never publish

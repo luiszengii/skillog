@@ -14,32 +14,7 @@ const layout = JSON.parse(await fs.readFile(layoutFile, "utf8"));
 const outputDir = path.resolve(path.dirname(layoutFile), layout.outputDir ?? "cards");
 const templateUrl = pathToFileURL(path.resolve(projectRoot, "pipelines/v1.1/layout/card-template.html")).href;
 
-const choices = {
-  result: ["dense-ledger", "split-stats"],
-  intro: ["staggered-steps", "number-rail"],
-  access: ["inline-audit", "split-command"]
-};
-
-function stableIndex(value, size) {
-  let hash = 2166136261;
-  for (const char of value) {
-    hash ^= char.charCodeAt(0);
-    hash = Math.imul(hash, 16777619) >>> 0;
-  }
-  return hash % size;
-}
-
 const requestedKinds = new Set(layout.cards ?? post.cards.map((card) => card.kind));
-const resolvedVariants = Object.fromEntries(Object.entries(choices).map(([kind, variants]) => {
-  const pinned = layout.variants?.[kind];
-  if (pinned) {
-    if (!variants.includes(pinned)) throw new Error(`Unknown ${kind} variant: ${pinned}`);
-    return [kind, pinned];
-  }
-  const key = `${layout.seed ?? 1}:${post.id}:${kind}`;
-  return [kind, variants[stableIndex(key, variants.length)]];
-}));
-post.layout = { seed: layout.seed ?? 1, resolvedVariants };
 
 if (!post.illustration) throw new Error(`Missing illustration in ${postFile}`);
 post.illustrationUrl = pathToFileURL(path.resolve(path.dirname(postFile), post.illustration)).href;
@@ -71,12 +46,10 @@ for (let index = 0; index < post.cards.length; index += 1) {
 
 await browser.close();
 const manifest = {
-  pipelineVersion: "v1.1-trial",
+  pipelineVersion: "v1.1-fixed",
   post: post.id,
-  seed: post.layout.seed,
-  cards: [...requestedKinds],
-  resolvedVariants
+  layout: "compact-aligned",
+  cards: [...requestedKinds]
 };
 await fs.writeFile(path.join(path.dirname(outputDir), "render-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Rendered ${[...requestedKinds].length} cards to ${outputDir}`);
-console.log(`Resolved variants: ${JSON.stringify(resolvedVariants)}`);

@@ -14,27 +14,7 @@ const layout = JSON.parse(await fs.readFile(layoutFile, "utf8"));
 post.illustrationUrl = pathToFileURL(path.resolve(path.dirname(postFile), post.illustration)).href;
 const templateUrl = pathToFileURL(path.join(projectRoot, "pipelines/v1.1/layout/card-template.html")).href;
 const widths = [320, 375, 414, 768, 1080];
-const choices = {
-  result: ["dense-ledger", "split-stats"],
-  intro: ["staggered-steps", "number-rail"],
-  access: ["inline-audit", "split-command"]
-};
-function stableIndex(value, size) {
-  let hash = 2166136261;
-  for (const char of value) {
-    hash ^= char.charCodeAt(0);
-    hash = Math.imul(hash, 16777619) >>> 0;
-  }
-  return hash % size;
-}
 const requestedKinds = new Set(layout.cards ?? post.cards.map((card) => card.kind));
-post.layout = {
-  seed: layout.seed ?? 1,
-  resolvedVariants: Object.fromEntries(Object.entries(choices).map(([kind, variants]) => {
-    const pinned = layout.variants?.[kind];
-    return [kind, pinned ?? variants[stableIndex(`${layout.seed ?? 1}:${post.id}:${kind}`, variants.length)]];
-  }))
-};
 
 const browser = await chromium.launch({
   headless: true,
@@ -63,6 +43,42 @@ for (const width of widths) {
     });
     if (result.scrollX !== 0 || result.cardLeft < -0.5 || result.cardRight > result.viewport + 0.5) {
       failures.push({ width, card: index + 1, ...result });
+    }
+
+    const alignment = await page.evaluate((kind) => {
+      const rounded = (value) => Math.round(value * 10) / 10;
+      if (kind === "result") {
+        const heading = document.querySelector(".result-page > section:first-child").getBoundingClientRect();
+        const panel = document.querySelector(".result-panel").getBoundingClientRect();
+        const stats = document.querySelector(".result-page__stats").getBoundingClientRect();
+        const statBoxes = [...document.querySelectorAll(".stat")].map((node) => node.getBoundingClientRect());
+        return {
+          kind,
+          sharedLeft: [heading.left, panel.left, stats.left].map(rounded),
+          statTops: statBoxes.map((box) => rounded(box.top)),
+          statWidths: statBoxes.map((box) => rounded(box.width))
+        };
+      }
+      if (kind === "intro") {
+        return {
+          kind,
+          stepTextLefts: [...document.querySelectorAll(".step > div")]
+            .map((node) => rounded(node.getBoundingClientRect().left))
+        };
+      }
+      return { kind };
+    }, post.cards[index].kind);
+
+    const allEqual = (values = []) => values.every((value) => Math.abs(value - values[0]) <= 0.5);
+    if (alignment.kind === "result" && (
+      !allEqual(alignment.sharedLeft) ||
+      !allEqual(alignment.statTops) ||
+      !allEqual(alignment.statWidths)
+    )) {
+      failures.push({ width, card: index + 1, alignment });
+    }
+    if (alignment.kind === "intro" && !allEqual(alignment.stepTextLefts)) {
+      failures.push({ width, card: index + 1, alignment });
     }
   }
   await page.close();

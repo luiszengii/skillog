@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "v1.1-trial",
-  "seed": 1,
-  "cards": ["result", "intro", "access"],
+  "pipelineVersion": "v1.1-fixed",
+  "layout": "compact-aligned",
+  "cards": ["cover", "result", "intro", "access"],
   "outputDir": "cards"
 }
